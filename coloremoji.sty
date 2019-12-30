@@ -1,14 +1,40 @@
-\usepackage{graphicx}
-\usepackage{ifxetex,ifluatex}
-\usepackage[export]{adjustbox}
+\ProvidesPackage{coloremoji}[2019/12/30]
+\RequirePackage{graphicx}
+\RequirePackage{ifxetex,ifluatex}
+\RequirePackage[export]{adjustbox}
+
+\DeclareOption{apple}{
+  \def \emojidir {appl}
+}
+\DeclareOption{google}{
+  \def \emojidir {goog}
+}
+\DeclareOption{fb}{
+  \def \emojidir {fb}
+}
+\DeclareOption{joy}{
+  \def \emojidir {joy}
+}
+\DeclareOption{win}{
+  \def \emojidir {wind}
+}
+\DeclareOption{sams}{
+  \def \emojidir {sams}
+}
+\DeclareOption{twtr}{
+  \def \emojidir {twtr}
+}
+
+\ExecuteOptions{apple}
+\ProcessOptions\relax
 
 \newif\ifunicode
 \ifxetex\unicodetrue\fi
 \ifluatex\unicodetrue\fi
 
 \ifunicode
-  \usepackage{fontspec}
-  \usepackage{newunicodechar}
+  \RequirePackage{fontspec}
+  \RequirePackage{newunicodechar}
   \newcommand{\DeclareUnicodeCharacter}[2]{%
     \begingroup\lccode`|=\string"#1\relax
     \lowercase{\endgroup\newunicodechar{|}}{#2}%
@@ -17,7 +43,7 @@
   \usepackage[utf8]{inputenc}
 \fi
 
-\newcommand{\coloremoji}[1]{\textrm{\includegraphics[width=0.95em,raise=-0.1em]{coloremoji/img/#1.jpg}\allowbreak}}
+\newcommand{\coloremoji}[1]{\textrm{\includegraphics[width=0.95em,raise=-0.1em]{coloremoji/\emojidir/#1.jpg}\allowbreak}}
 
 \DeclareUnicodeCharacter{1F600}{{\coloremoji{1f600}}}
 \DeclareUnicodeCharacter{1F603}{{\coloremoji{1f603}}}
@@ -2750,3 +2776,4 @@
 \DeclareUnicodeCharacter{E006C}{{\coloremoji{1f3f4e0067e0062e0077e006ce0073e007f}}}
 \DeclareUnicodeCharacter{E0073}{{\coloremoji{1f3f4e0067e0062e0077e006ce0073e007f}}}
 \DeclareUnicodeCharacter{E007F}{{\coloremoji{1f3f4e0067e0062e0077e006ce0073e007f}}}
+\endinput
