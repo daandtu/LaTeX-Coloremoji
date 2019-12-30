@@ -5,6 +5,7 @@ import os
 
 head = r"""\usepackage{graphicx}
 \usepackage{ifxetex,ifluatex}
+\usepackage[export]{adjustbox}
 
 \newif\ifunicode
 \ifxetex\unicodetrue\fi
@@ -21,7 +22,7 @@ head = r"""\usepackage{graphicx}
   \usepackage[utf8]{inputenc}
 \fi
 
-\newcommand{\coloremoji}[1]{\textrm{\includegraphics[width=1em]{coloremoji/img/#1.jpg}}}
+\newcommand{\coloremoji}[1]{\textrm{\includegraphics[width=0.95em,raise=-0.1em]{coloremoji/img/#1.jpg}\allowbreak}}
 
 """
 		

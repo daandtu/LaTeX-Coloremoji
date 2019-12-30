@@ -1,5 +1,6 @@
 \usepackage{graphicx}
 \usepackage{ifxetex,ifluatex}
+\usepackage[export]{adjustbox}
 
 \newif\ifunicode
 \ifxetex\unicodetrue\fi
@@ -16,7 +17,7 @@
   \usepackage[utf8]{inputenc}
 \fi
 
-\newcommand{\coloremoji}[1]{\textrm{\includegraphics[width=1em]{coloremoji/img/#1.jpg}}}
+\newcommand{\coloremoji}[1]{\textrm{\includegraphics[width=0.95em,raise=-0.1em]{coloremoji/img/#1.jpg}\allowbreak}}
 
 \DeclareUnicodeCharacter{1F600}{{\coloremoji{1f600}}}
 \DeclareUnicodeCharacter{1F603}{{\coloremoji{1f603}}}
