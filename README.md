@@ -7,8 +7,9 @@ The library replaces the emoji characters with small images of the corresponding
 Different skin tones are currently not supported.
 
 ### Setup
-1. Clone the `coloremoji` directory and the `coloremoji.tex` file to the same directory as your main `.tex` file.
-2. Copy `\input{coloremoji.tex}` into the preamble of your main `.tex` file.
+1. Clone the `coloremoji` directory and the `coloremoji.sty` file to the same directory as your main `.tex` file.
+2. Copy `\usepackage[<vendor>]{coloremoji}` into the preamble of your main `.tex` file.
+Depending on `<vendor>` different emoji images are used. Possible values are `apple`,`google`,`fb`,`joy`,`win`,`sams` and `twtr`. The default value is `apple`.
 
 ### Example
 The LaTeX code (in this case used for math) `$😂 = \dfrac{😜}{😋} \cdot 💦$` will generate something like ![LaTeX Emoji example](https://github.com/daandtu/coloremoji-latex/raw/master/example/example.png).  
