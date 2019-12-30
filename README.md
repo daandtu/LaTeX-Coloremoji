@@ -12,7 +12,7 @@ Different skin tones are currently not supported.
 Depending on `<vendor>` different emoji images are used. Possible values are `apple`,`google`,`fb`,`joy`,`win`,`sams` and `twtr`. The default value is `apple`.
 
 ### Example
-The LaTeX code (in this case used for math) `$😂 = \dfrac{😜}{😋} \cdot 💦$` will generate something like ![LaTeX Emoji example](https://github.com/daandtu/coloremoji-latex/raw/master/example/example.png).  
+The LaTeX code (in this case used for math) `$😂 = \dfrac{😜}{😋} \cdot 💦$` will generate something like <img src="https://github.com/daandtu/coloremoji-latex/raw/master/example/example.png" alt="LaTeX Emoji example" width="200"/>.  
 You can find the complete example code [here](https://github.com/daandtu/coloremoji-latex/blob/master/example/example.tex).
 
 ### License
