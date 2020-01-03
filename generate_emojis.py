@@ -65,6 +65,7 @@ count = 0
 errorcount = 0
 out = open('coloremoji.sty', 'w')
 out.write(head)
+emojilist = []
 for line in contents:
 	try:
 		
@@ -78,8 +79,9 @@ for line in contents:
 				pass
 				#print(traceback.format_exc())
 		for i in name.split('_'):
-			if int(i, 16) > 127: # Ignore ASCII character
+			if int(i, 16) > 127 and i not in emojilist: # Ignore ASCII character and prevent double declaration
 				out.write('\DeclareUnicodeCharacter{%s}{{\coloremoji{%s}}}\n' % (i.upper(), name.replace('_','')))
+				emojilist.append(i)
 		count += 1
 	except:
 		errorcount += 1
