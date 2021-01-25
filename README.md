@@ -17,5 +17,6 @@ Depending on `<vendor>` different emoji images are used. Possible values are `ap
 2. Proceed like described in section 2 of the regular setup.
 
 ### Example
-The LaTeX code (in this case used for math) `$😂 = \frac{😜}{😋} \cdot 💦$` will generate something like <img src="https://github.com/daandtu/coloremoji-latex/raw/master/example/example.png" alt="LaTeX Emoji example" width="200"/>.  
+The LaTeX code (in this case used for math) `$😂 = \frac{😜}{😋} \cdot 💦$` will generate something like  
+<img src="https://github.com/daandtu/coloremoji-latex/raw/master/example/example.png" alt="LaTeX Emoji example" width="200"/>.  
 You can find the complete example code [here](example/example.tex).
