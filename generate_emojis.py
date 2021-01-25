@@ -32,7 +32,7 @@ for index, row in enumerate(page_content):
 		images = row.split("src='")
 		for i in range(7):
 			try:
-				image_name = os.path.join('coloremoji', vendor_list[i],'{}.jpg'.format(unicode_name.replace('_','')))
+				image_name = os.path.join('coloremoji', vendor_list[i],'{}.png'.format(unicode_name.replace('_','')))
 				urlrequest.urlretrieve(images[i+1].split("'>", 1)[0], image_name)
 			except:
 				pass
