@@ -1,92 +1,56 @@
 # -*- coding: utf-8 -*-
-import urllib.request as ur
+import urllib.request as urlrequest
 import os
-#import traceback
+import traceback
 
-head = r"""\ProvidesPackage{coloremoji}[2019/12/30]
-\RequirePackage{graphicx}
-\RequirePackage{ifxetex,ifluatex}
-\RequirePackage[export]{adjustbox}
+EMOJI_URL = 'https://unicode.org/emoji/charts-13.0/full-emoji-list.html'
 
-\DeclareOption{apple}{
-  \def \emojidir {appl}
-}
-\DeclareOption{google}{
-  \def \emojidir {goog}
-}
-\DeclareOption{fb}{
-  \def \emojidir {fb}
-}
-\DeclareOption{joy}{
-  \def \emojidir {joy}
-}
-\DeclareOption{win}{
-  \def \emojidir {wind}
-}
-\DeclareOption{sams}{
-  \def \emojidir {sams}
-}
-\DeclareOption{twtr}{
-  \def \emojidir {twtr}
-}
-
-\ExecuteOptions{apple}
-\ProcessOptions\relax
-
-\newif\ifunicode
-\ifxetex\unicodetrue\fi
-\ifluatex\unicodetrue\fi
-
-\ifunicode
-  \RequirePackage{fontspec}
-  \RequirePackage{newunicodechar}
-  \newcommand{\DeclareUnicodeCharacter}[2]{%
-    \begingroup\lccode`|=\string"#1\relax
-    \lowercase{\endgroup\newunicodechar{|}}{#2}%
-  }
-\else
-  \usepackage[utf8]{inputenc}
-\fi
-
-\newcommand{\coloremoji}[1]{\textrm{\includegraphics[width=0.95em,raise=-0.1em]{coloremoji/\emojidir/#1.jpg}\allowbreak}}
-
-"""
-
-vendor_list = ['appl', 'goog', 'fb', 'wind', 'twtr', 'joy', 'sams']
+vendor_list = ['apple', 'google', 'facebook', 'windows', 'twitter', 'joypixels', 'samsung']
 for v in vendor_list:
 	if not os.path.exists(os.path.join('coloremoji', v)):
 		os.makedirs(os.path.join('coloremoji', v))
-		
-page = ur.urlopen("https://unicode.org/emoji/charts-13.0/full-emoji-list.html").read()
+
+print('Fetch webpage...', end = '\r')
+page = urlrequest.urlopen(EMOJI_URL).read()
 print('Downloaded webpage. Start processing...')
-contents = page.decode().split('<tr>')
+page_content = page.decode().split('<tr>')
+
+file = open('coloremoji.sty', 'r+')
+output = ""
+line = file.readline()
+while '% Start declaring emojis' not in line and len(line) > 0:
+	output += line
+	line = file.readline()
+output += '% Start declaring emojis\n'
 
 count = 0
-errorcount = 0
-out = open('coloremoji.sty', 'w')
-out.write(head)
 emojilist = []
-for line in contents:
-	try:
-		
-		name = line.split("name='", 1)[1].split("'>", 1)[0]
-		image = line.split("src='")
+for index, row in enumerate(page_content):
+	if "class='code'" in row:
+		print('Processing emoji {} ({:.2f}%)'.format(count, index / len(page_content) * 100), end = '\r')
+		unicode_name = row.split("name='", 1)[1].split("'>", 1)[0]
+		images = row.split("src='")
 		for i in range(7):
 			try:
-				image_name = os.path.join('coloremoji',vendor_list[i],'{}.jpg'.format(name.replace('_','')))
-				ur.urlretrieve(image[i+1].split("'>", 1)[0], image_name)
+				image_name = os.path.join('coloremoji', vendor_list[i],'{}.jpg'.format(unicode_name.replace('_','')))
+				urlrequest.urlretrieve(images[i+1].split("'>", 1)[0], image_name)
 			except:
 				pass
-				#print(traceback.format_exc())
-		for i in name.split('_'):
+		for i in unicode_name.split('_'):
 			if int(i, 16) > 127 and i not in emojilist: # Ignore ASCII character and prevent double declaration
-				out.write('\DeclareUnicodeCharacter{%s}{{\coloremoji{%s}}}\n' % (i.upper(), name.replace('_','')))
+				output += r'\DeclareUnicodeCharacter{{{}}}{{{{\coloremoji{{{}}}}}}}'.format(i.upper(), unicode_name.replace('_','')) + '\n'
 				emojilist.append(i)
 		count += 1
-	except:
-		errorcount += 1
-		#print(traceback.format_exc())
 
-out.write(r'\endinput')
-out.close()
+line = file.readline()
+while len(line) > 0:
+	if 'DeclareUnicodeCharacter' not in line:
+		output += line
+	line = file.readline()
+
+file.seek(0)
+file.write(output)
+file.truncate()
+file.close()
+
 print('Successfully downloaded {} emoji images.'.format(count))
