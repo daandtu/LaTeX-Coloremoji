@@ -12,6 +12,10 @@ Different skin tones are currently not supported.
 If you place the files in another directory you have to use `\usepackage[<vendor>, directory=/path/to/emoji-dir]{/path/to/coloremoji-sty}`.  
 Depending on `<vendor>` different emoji images are used. Possible values are `apple`,`google`,`facebook`,`joypixels`,`windows`,`samsung` and `twitter`. The default value is `apple`.
 
+### Setup from source
+1. Clone the respository and run `generate_emojis.py`
+2. Proceed like described in section 2 of the regular setup.
+
 ### Example
 The LaTeX code (in this case used for math) `$😂 = \frac{😜}{😋} \cdot 💦$` will generate something like <img src="https://github.com/daandtu/coloremoji-latex/raw/master/example/example.png" alt="LaTeX Emoji example" width="200"/>.  
 You can find the complete example code [here](example/example.tex).
