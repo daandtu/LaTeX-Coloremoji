@@ -9,8 +9,10 @@ Different skin tones are currently not supported.
 ### Setup
 1. Clone the `coloremoji` directory and the `coloremoji.sty` file to the same directory as your main `.tex` file.
 2. Copy `\usepackage[<vendor>]{coloremoji}` into the preamble of your main `.tex` file.
-Depending on `<vendor>` different emoji images are used. Possible values are `apple`,`google`,`fb`,`joy`,`win`,`sams` and `twtr`. The default value is `apple`.
+Depending on `<vendor>` different emoji images are used. Possible values are `apple`,`google`,`facebook`,`joypixels`,`windows`,`samsung` and `twitter`. The default value is `apple`.
+3. You can optionally specify a directory for the emoji images with `\usepackage[directory=<directory>]{coloremoji}`.
+The default value is `coloremoji` in the same directory as the `coloremoji.sty` file.
 
 ### Example
-The LaTeX code (in this case used for math) `$😂 = \dfrac{😜}{😋} \cdot 💦$` will generate something like <img src="https://github.com/daandtu/coloremoji-latex/raw/master/example/example.png" alt="LaTeX Emoji example" width="200"/>.  
+The LaTeX code (in this case used for math) `$😂 = \frac{😜}{😋} \cdot 💦$` will generate something like <img src="https://github.com/daandtu/coloremoji-latex/raw/master/example/example.png" alt="LaTeX Emoji example" width="200"/>.  
 You can find the complete example code [here](example/example.tex).
