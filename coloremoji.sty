@@ -1,50 +1,36 @@
-\ProvidesPackage{coloremoji}[2019/12/30]
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{coloremoji}[2021/01/24]
+
+\RequirePackage{kvoptions}
 \RequirePackage{graphicx}
 \RequirePackage{ifxetex,ifluatex}
 \RequirePackage[export]{adjustbox}
 
-\DeclareOption{apple}{
-  \def \emojidir {appl}
-}
-\DeclareOption{google}{
-  \def \emojidir {goog}
-}
-\DeclareOption{fb}{
-  \def \emojidir {fb}
-}
-\DeclareOption{joy}{
-  \def \emojidir {joy}
-}
-\DeclareOption{win}{
-  \def \emojidir {wind}
-}
-\DeclareOption{sams}{
-  \def \emojidir {sams}
-}
-\DeclareOption{twtr}{
-  \def \emojidir {twtr}
-}
+\SetupKeyvalOptions{family=coloremoji, prefix=coloremoji@}
+\newcommand{\emojivendor}{apple}
+\DeclareVoidOption{apple}{\renewcommand{\emojivendor}{apple}}
+\DeclareVoidOption{google}{\renewcommand{\emojivendor}{google}}
+\DeclareVoidOption{facebook}{\renewcommand{\emojivendor}{facebook}}
+\DeclareVoidOption{joypixels}{\renewcommand{\emojivendor}{joypixels}}
+\DeclareVoidOption{windows}{\renewcommand{\emojivendor}{windows}}
+\DeclareVoidOption{samsung}{\renewcommand{\emojivendor}{samsung}}
+\DeclareVoidOption{twitter}{\renewcommand{\emojivendor}{twitter}}
+\DeclareStringOption[coloremoji]{directory}
+\ProcessKeyvalOptions*\relax
 
-\ExecuteOptions{apple}
-\ProcessOptions\relax
 
 \newif\ifunicode
 \ifxetex\unicodetrue\fi
 \ifluatex\unicodetrue\fi
 
 \ifunicode
-  \RequirePackage{fontspec}
   \RequirePackage{newunicodechar}
-  \newcommand{\DeclareUnicodeCharacter}[2]{%
-    \begingroup\lccode`|=\string"#1\relax
-    \lowercase{\endgroup\newunicodechar{|}}{#2}%
-  }
-\else
-  \usepackage[utf8]{inputenc}
+  \newcommand{\DeclareUnicodeCharacter}[2]{\lccode`|=\string"#1\relax\lowercase{\newunicodechar{|}}{#2}}
 \fi
 
-\newcommand{\coloremoji}[1]{\textrm{\includegraphics[width=0.95em,raise=-0.1em]{coloremoji/\emojidir/#1.jpg}\allowbreak}}
+\newcommand{\coloremoji}[1]{\includegraphics[width=0.85em, raise=-0.1em]{\coloremoji@directory/\emojivendor/#1.jpg}\allowbreak}
 
+% Start declaring emojis
 \DeclareUnicodeCharacter{1F600}{{\coloremoji{1f600}}}
 \DeclareUnicodeCharacter{1F603}{{\coloremoji{1f603}}}
 \DeclareUnicodeCharacter{1F604}{{\coloremoji{1f604}}}
@@ -295,6 +281,7 @@
 \DeclareUnicodeCharacter{1F46E}{{\coloremoji{1f46e}}}
 \DeclareUnicodeCharacter{1F575}{{\coloremoji{1f575}}}
 \DeclareUnicodeCharacter{1F482}{{\coloremoji{1f482}}}
+\DeclareUnicodeCharacter{1F977}{{\coloremoji{1f977}}}
 \DeclareUnicodeCharacter{1F477}{{\coloremoji{1f477}}}
 \DeclareUnicodeCharacter{1F934}{{\coloremoji{1f934}}}
 \DeclareUnicodeCharacter{1F478}{{\coloremoji{1f478}}}
@@ -334,7 +321,6 @@
 \DeclareUnicodeCharacter{1F46F}{{\coloremoji{1f46f}}}
 \DeclareUnicodeCharacter{1F9D6}{{\coloremoji{1f9d6}}}
 \DeclareUnicodeCharacter{1F9D7}{{\coloremoji{1f9d7}}}
-\DeclareUnicodeCharacter{1F977}{{\coloremoji{1f977}}}
 \DeclareUnicodeCharacter{1F93A}{{\coloremoji{1f93a}}}
 \DeclareUnicodeCharacter{1F3C7}{{\coloremoji{1f3c7}}}
 \DeclareUnicodeCharacter{26F7}{{\coloremoji{26f7}}}
@@ -1408,4 +1394,5 @@
 \DeclareUnicodeCharacter{E0074}{{\coloremoji{1f3f4e0067e0062e0073e0063e0074e007f}}}
 \DeclareUnicodeCharacter{E0077}{{\coloremoji{1f3f4e0067e0062e0077e006ce0073e007f}}}
 \DeclareUnicodeCharacter{E006C}{{\coloremoji{1f3f4e0067e0062e0077e006ce0073e007f}}}
+
 \endinput
