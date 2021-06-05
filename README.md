@@ -1,6 +1,6 @@
 # Coloremoji for LaTeX
 
-A LaTeX package for outputting Emojis (🙂🐗🍈🕛) in your LaTeX files. The package is inspired from [this repository](https://github.com/alecjacobson/coloremoji.sty). However, this repository supports 1809 emojis and not only PDFLaTeX but also other compilers such as XeLaTeX and LuaLaTeX. Furthermore, multiple emoji designs can be choosen.
+A LaTeX package for outputting Emojis (🙂🐗🍈🕛) in your LaTeX files. The package was inspired by [this repository](https://github.com/alecjacobson/coloremoji.sty). However, this repository supports 1809 emojis and not only PDFLaTeX but also other compilers such as XeLaTeX and LuaLaTeX. Furthermore, multiple emoji designs can be choosen.
 
 ### How it works
 The library replaces the emoji characters with small images of the corresponding emoji. Therefore they can't be copied in the final PDF file. The emoji images are downloaded from [unicode.org](https://unicode.org/emoji/charts-13.0/full-emoji-list.html) via the script [generate_emojis.py](generate_emojis.py). Standard emoji images are from Apples emoji font.  
